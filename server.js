@@ -60,7 +60,7 @@ db.on('disconnected', connect);
 app.get('/api', function (req, res) {
     res.json(200, {msg: 'OK' });
 })
-/*
+
 app.get('/api/todos', function (req, res) {
     // http://mongoosejs.com/docs/api.html#query_Query-find
     Todo.find( function ( err, todos ){
@@ -112,7 +112,7 @@ app.del('/api/todos/:id', function (req, res) {
       });
     });
   })
-*/
+
 /*
 app.use(bodyParser.raw());
 
