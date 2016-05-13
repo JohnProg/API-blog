@@ -3,6 +3,8 @@
 //var config      = require('./config'); // get our config file
 //var mongodb     = require('mongolab-provider').init('liveupload', config.api_settings);
 var express     = require('express');
+var mongoose = require('mongoose');
+var Todo = require('../models/Todo.js');
 var bodyParser  = require('body-parser');
 var app         = express();
 
@@ -35,19 +37,16 @@ db.on('error', function(error){
 
 db.on('disconnected', connect);
 
-var mongoose = require('mongoose');
-var Todo = require('../models/Todo.js');
-
 
 //app.set('superSecret', config.secret); 
 
 // parse application/json
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
 // parse application/x-www-form-urlencoded
 // configure app to use bodyParser()
 // this will let us get the data from a POST
-app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/api', function (req, res) {
     res.json(200, {msg: 'OK' });
