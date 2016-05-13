@@ -52,10 +52,10 @@ db.on('disconnected', connect);
 //app.set('superSecret', config.secret); 
 
 // parse application/json
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 
 // parse application/x-www-form-urlencoded
-//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/api', function (req, res) {
     res.json(200, {msg: 'OK' });
@@ -200,7 +200,6 @@ app.get('/users/', authorized, function(req, res) {
 });
 */
 //app.use(express.static(__dirname + '/'))
-//server.listen(server_port, server_ip_address);
 
 server.listen(server_port, server_ip_address, function(){
   console.log('Express server listening on port ' + server_port);
