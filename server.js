@@ -3,7 +3,6 @@
 //var config      = require('./config'); // get our config file
 //var mongodb     = require('mongolab-provider').init('liveupload', config.api_settings);
 var express     = require('express');
-var mongoose    = require('mongoose');
 var bodyParser  = require('body-parser');
 var app         = express();
 
@@ -13,16 +12,6 @@ var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 
 //var io = require('socket.io').listen(server);
-
-
-// Mongoose Schema definition
-Schema = new mongoose.Schema({
-  id       : String, 
-  title    : String,
-  completed: Boolean
-}),
-
-Todo = mongoose.model('Todo', Schema);
 
 var MONGO_URL = '127.0.0.1:27017/' + process.env.OPENSHIFT_APP_NAME;
 
@@ -46,7 +35,8 @@ db.on('error', function(error){
 
 db.on('disconnected', connect);
 
-
+var mongoose = require('mongoose');
+var Todo = require('../models/Todo.js');
 
 
 //app.set('superSecret', config.secret); 
@@ -55,6 +45,8 @@ db.on('disconnected', connect);
 app.use(bodyParser.json());
 
 // parse application/x-www-form-urlencoded
+// configure app to use bodyParser()
+// this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/api', function (req, res) {
@@ -64,7 +56,9 @@ app.get('/api', function (req, res) {
 app.get('/api/todos', function (req, res) {
     // http://mongoosejs.com/docs/api.html#query_Query-find
     Todo.find( function ( err, todos ){
-      res.json(200, todos);
+        if(err) res.send(500, err.message);
+        res.json(200, todos);
+        //res.status(200).jsonp(tvshows);
     });
   })
 
@@ -73,7 +67,9 @@ app.post('/api/todos', function (req, res) {
     todo.id = todo._id;
     // http://mongoosejs.com/docs/api.html#model_Model-save
     todo.save(function (err) {
-      res.json(200, todo);
+        if(err) return res.status(500).send( err.message);
+        //res.status(200).jsonp(todo);
+        res.json(200, todo);
     });
   })
 
