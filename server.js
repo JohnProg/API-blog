@@ -69,7 +69,9 @@ app.get('/api/todos', function (req, res) {
 })
 
 app.post('/api/todos', function (req, res) {
-    var todo = new Todo( req.body );
+    var todo = new Todo();
+    todo.title = req.body.title;
+    todo.completed = req.body.completed;
     todo.id = todo._id;
     // http://mongoosejs.com/docs/api.html#model_Model-save
     todo.save(function (err) {
