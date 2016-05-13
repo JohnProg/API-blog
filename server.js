@@ -49,11 +49,10 @@ db.on('disconnected', connect);
 
 //app.set('superSecret', config.secret); 
 
-// parse application/json
-app.use(bodyParser.json());
-
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+// parse application/json
+app.use(bodyParser.json());
 
 app.get('/api', function (req, res) {
     res.json(200, {msg: 'OK' });
