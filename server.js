@@ -1,6 +1,6 @@
 #!/bin/env node
 //  OpenShift sample Node application
-var config      = require('./config'); // get our config file
+//var config      = require('./config'); // get our config file
 //var mongodb     = require('mongolab-provider').init('liveupload', config.api_settings);
 var express     = require('express');
 var mongoose    = require('mongoose');
@@ -9,10 +9,10 @@ var app         = express();
 
 var server = require('http').createServer(app);
 
-var server_port = process.env.OPENSHIFT_NODEJS_PORT || 5000;
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 
-var io = require('socket.io').listen(server);
+//var io = require('socket.io').listen(server);
 
 
 // Mongoose Schema definition
@@ -52,15 +52,15 @@ db.on('disconnected', connect);
 //app.set('superSecret', config.secret); 
 
 // parse application/json
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/api', function (req, res) {
     res.json(200, {msg: 'OK' });
 })
-
+/*
 app.get('/api/todos', function (req, res) {
     // http://mongoosejs.com/docs/api.html#query_Query-find
     Todo.find( function ( err, todos ){
@@ -112,7 +112,7 @@ app.del('/api/todos/:id', function (req, res) {
       });
     });
   })
-
+*/
 /*
 app.use(bodyParser.raw());
 
