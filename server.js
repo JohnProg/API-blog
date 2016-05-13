@@ -14,15 +14,8 @@ var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 
 //var io = require('socket.io').listen(server);
 
-
 // Mongoose Schema definition
-Schema = new mongoose.Schema({
-  id       : String, 
-  title    : String,
-  completed: Boolean
-}),
-
-Todo = mongoose.model('Todo', Schema);
+var Todo = require('./models/Todo');
 
 var MONGO_URL = '127.0.0.1:27017/' + process.env.OPENSHIFT_APP_NAME;
 
