@@ -47,8 +47,6 @@ db.on('error', function(error){
 db.on('disconnected', connect);
 
 
-
-
 //app.set('superSecret', config.secret); 
 
 // parse application/json
@@ -64,18 +62,22 @@ app.get('/api', function (req, res) {
 app.get('/api/todos', function (req, res) {
     // http://mongoosejs.com/docs/api.html#query_Query-find
     Todo.find( function ( err, todos ){
-      res.json(200, todos);
+        if(err) res.send(500, err.message);
+        res.json(200, todos);
+        //res.status(200).jsonp(tvshows);
     });
-  })
+})
 
 app.post('/api/todos', function (req, res) {
     var todo = new Todo( req.body );
     todo.id = todo._id;
     // http://mongoosejs.com/docs/api.html#model_Model-save
     todo.save(function (err) {
-      res.json(200, todo);
+        if(err) return res.status(500).send( err.message);
+        //res.status(200).jsonp(todo);
+        res.json(200, todo);
     });
-  })
+})
 
 app.del('/api/todos', function (req, res) {
     // http://mongoosejs.com/docs/api.html#query_Query-remove
