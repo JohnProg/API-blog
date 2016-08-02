@@ -1,7 +1,7 @@
 {
   "name": "Blog-API",
   "version": "0.0.1",
-  "description": "BLOG Application",
+  "description": "Blog API",
   "keywords": [
     "Node.js",
     "application"
