@@ -1,3 +1,4 @@
-The OpenShift `nodejs` cartridge documentation can be found at:
+API built with nodeJS, expressJS, mongoose and JWT
+==================================================
 
-http://openshift.github.io/documentation/oo_cartridge_guide.html#nodejs
+This API will be for the [blog client in typescript](https://github.com/JohnProg/TypeScript_AngularJS_Blog)
